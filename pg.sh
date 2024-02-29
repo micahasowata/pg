@@ -26,8 +26,8 @@ echo "postgres root password"
 read pg_password
 
 echo "what port should it run on"
-echo pg_port
+read pg_port
 
-docker run --name $pg_container -e POSTGRES_USER=$pg_username -e POSTGRES_DB=$pg_dbname -e POSTGRES_PASSWORD=$pg_password -d -p 5432:5432 -v $pg_volume:/var/lib/postgresql/data postgres
+docker run --name $pg_container -e POSTGRES_USER=$pg_username -e POSTGRES_DB=$pg_dbname -e POSTGRES_PASSWORD=$pg_password -d -p $pg_port:5432 -v $pg_volume:/var/lib/postgresql/data postgres
 
 echo "🥳🥳🥳🥳"
