@@ -92,7 +92,7 @@ trap "
                                                                                     
 " SIGHUP SIGINT SIGTERM
 
-@docker volume create "$pg_volume"
-@docker run --name "$pg_container" -e POSTGRES_USER="$pg_username" -e POSTGRES_DB="$pg_dbname" -e POSTGRES_PASSWORD="$pg_password" -d -p "$pg_port":5432 -v "$pg_volume":/var/lib/postgresql/data postgres
+docker volume create "$pg_volume"
+docker run --name "$pg_container" -e POSTGRES_USER="$pg_username" -e POSTGRES_DB="$pg_dbname" -e POSTGRES_PASSWORD="$pg_password" -d -p "$pg_port":5432 -v "$pg_volume":/var/lib/postgresql/data postgres
 
 echo 'DSN: postgresql://'"$pg_username"':'"$pg_password"'@localhost:'"$pg_port"'/'"$pg_dbname"'?sslmode=disable'
