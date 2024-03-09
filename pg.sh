@@ -78,7 +78,8 @@ then
     echo "$pg_port is not a valid port"
 fi
 
-trap "
+trap '
+echo "
 
 ░▒▓███████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░      ░▒▓███████▓▒░ ░▒▓██████▓▒░  
 ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░             ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ 
@@ -87,10 +88,9 @@ trap "
 ░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░             ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░ 
 ░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░             ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░ 
 ░▒▓███████▓▒░   ░▒▓█▓▒░   ░▒▓████████▓▒░      ░▒▓█▓▒░       ░▒▓██████▓▒░  
-                                                                          
-                                                                          
-                                                                                    
-" SIGHUP SIGINT SIGTERM
+ 
+
+"; exit' SIGHUP SIGINT SIGTERM
 
 docker volume create "$pg_volume"
 docker run --name "$pg_container" -e POSTGRES_USER="$pg_username" -e POSTGRES_DB="$pg_dbname" -e POSTGRES_PASSWORD="$pg_password" -d -p "$pg_port":5432 -v "$pg_volume":/var/lib/postgresql/data postgres
