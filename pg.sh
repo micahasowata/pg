@@ -23,7 +23,7 @@ then
     exit
 fi
 
-@echo ""
+echo ""
 
 echo "📦 Set container name 📦"
 read -r pg_container
@@ -36,7 +36,7 @@ then
     exit
 fi
 
-@echo ""
+echo ""
 
 echo "👑 Set root username 👑"
 read -r pg_username
@@ -49,7 +49,7 @@ then
     exit
 fi
 
-@echo ""
+echo ""
 
 echo "🗃️ Set database name 🗃️"
 read -r pg_dbname
@@ -62,7 +62,7 @@ then
     exit
 fi
 
-@echo ""
+echo ""
 
 echo "🔒 Set password 🔒"
 read -r pg_password
@@ -75,7 +75,7 @@ then
     exit
 fi
 
-@echo ""
+echo ""
 
 echo "🚪 Set port e.g 5432 🚪"
 read -r pg_port
@@ -91,6 +91,6 @@ fi
 docker volume create "$pg_volume"
 docker run --name "$pg_container" -e POSTGRES_USER="$pg_username" -e POSTGRES_DB="$pg_dbname" -e POSTGRES_PASSWORD="$pg_password" -d -p "$pg_port":5432 -v "$pg_volume":/var/lib/postgresql/data postgres
 
-@echo ""
+echo ""
 
 echo '📁 DSN: postgresql://'"$pg_username"':'"$pg_password"'@localhost:'"$pg_port"'/'"$pg_dbname"'?sslmode=disable'
