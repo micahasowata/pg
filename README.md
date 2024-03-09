@@ -28,7 +28,7 @@ sudo chmod +x pg.sh
 sudo mv pg.sh /usr/local/bin/
 ```
 
-4. Alias the `pg.sh` script
+4. Alias the `pg.sh` script in your shell file e.g `.zshrc` `.bashrc` etc.
 
 ```
 alias pg="pg.sh"
