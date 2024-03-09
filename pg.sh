@@ -12,7 +12,7 @@ echo "
                                                                                        
                                                                                        
 "
-echo "Set volume name"
+echo "🗄️ Set volume name 🗄️"
 read -r pg_volume
 
 length_of_pg_volume=${#pg_volume}
@@ -23,7 +23,7 @@ then
     exit
 fi
 
-echo "Set container name"
+echo "\n📦 Set container name 📦"
 read -r pg_container
 
 length_of_pg_container=${#pg_container}
@@ -34,7 +34,7 @@ then
     exit
 fi
 
-echo "Set root username"
+echo "\n👑 Set root username 👑"
 read -r pg_username
 
 length_of_pg_username=${#pg_username}
@@ -45,7 +45,7 @@ then
     exit
 fi
 
-echo "Set database name"
+echo "\n🗃️ Set database name 🗃️"
 read -r pg_dbname
 
 length_of_pg_dbname=${#pg_dbname}
@@ -56,7 +56,7 @@ then
     exit
 fi
 
-echo "Set password"
+echo "\n🔒 Set password 🔒"
 read -r pg_password
 
 length_of_pg_password=${#pg_password}
@@ -67,7 +67,7 @@ then
     exit
 fi
 
-echo "Set port e.g 5432"
+echo "\n🚪 Set port e.g 5432 🚪"
 read -r pg_port
 
 lower_bound=1024
@@ -78,21 +78,7 @@ then
     echo "$pg_port is not a valid port"
 fi
 
-trap '
-echo "
-
-░▒▓███████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░      ░▒▓███████▓▒░ ░▒▓██████▓▒░  
-░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░             ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ 
-░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░             ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░        
-░▒▓███████▓▒░ ░▒▓██████▓▒░░▒▓██████▓▒░        ░▒▓███████▓▒░░▒▓█▓▒▒▓███▓▒░ 
-░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░             ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░ 
-░▒▓█▓▒░░▒▓█▓▒░  ░▒▓█▓▒░   ░▒▓█▓▒░             ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░ 
-░▒▓███████▓▒░   ░▒▓█▓▒░   ░▒▓████████▓▒░      ░▒▓█▓▒░       ░▒▓██████▓▒░  
- 
-
-"; exit' SIGHUP SIGINT SIGTERM
-
 docker volume create "$pg_volume"
 docker run --name "$pg_container" -e POSTGRES_USER="$pg_username" -e POSTGRES_DB="$pg_dbname" -e POSTGRES_PASSWORD="$pg_password" -d -p "$pg_port":5432 -v "$pg_volume":/var/lib/postgresql/data postgres
 
-echo 'DSN: postgresql://'"$pg_username"':'"$pg_password"'@localhost:'"$pg_port"'/'"$pg_dbname"'?sslmode=disable'
+echo '\n📁 DSN: postgresql://'"$pg_username"':'"$pg_password"'@localhost:'"$pg_port"'/'"$pg_dbname"'?sslmode=disable'
